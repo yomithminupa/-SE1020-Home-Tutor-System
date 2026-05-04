@@ -1,0 +1,4 @@
+ACADEMIC|S001|Mathematics|Grade 10|Local syllabus mathematics classes|Science
+ACADEMIC|S002|Science|Grade 11|Physics chemistry and biology support|Science
+SKILL|S003|Spoken English|All Levels|Communication and pronunciation practice|Beginner
+ACADEMIC|S004|ICT|Grade 12|Programming database and networking basics|Technology
