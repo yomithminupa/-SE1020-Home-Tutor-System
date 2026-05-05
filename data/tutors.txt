@@ -1,3 +1,0 @@
-ONLINE|T001|Ayesha Silva|ayesha@example.com|0761234567|Mathematics|BSc Mathematics|Colombo|1500.0|Available|Zoom
-HOME_VISIT|T002|Ruwan Jayasinghe|ruwan@example.com|0759876543|Science|BEd Science|Kandy|1800.0|Weekends|500.0
-ONLINE|T003|Tharindu Wijesinghe|tharindu@example.com|0743332211|ICT|BSc IT|Galle|1600.0|Evenings|Google Meet

@@ -1,3 +1,0 @@
-STUDENT|U001|Nimal Perera|nimal@example.com|0712345678|pass123|Grade 10|Colombo
-PARENT|U002|Kasuni Fernando|kasuni@example.com|0774567891|parent123|Amaya Fernando|Kandy
-ADMIN|A001|Admin User|admin@example.com|0701112222|admin123|FULL

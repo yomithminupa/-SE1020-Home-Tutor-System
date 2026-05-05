@@ -1,2 +1,0 @@
-VERIFIED|R001|T001|U001|5|Clear explanations and useful examples|B001
-PUBLIC|R002|T002|U002|4|Good home visit tutor for science|Kasuni
