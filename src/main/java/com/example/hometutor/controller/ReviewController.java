@@ -12,44 +12,92 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/reviews")
+//crate a class
 public class ReviewController {
+    private final record ReviewService reviewService;
+//constructor
+ public ReviewController(ReviewService reviewService){
+     this.reviewService=reviewService;
+ }
+ // List reviews (with optional search) and show new review form page
+@GetMapping
+    public String list(@RequestParam(required = false)String keyword,Model model){
+     model.addAttribute("reviews", reviewService.search(keyword));
+     model.addAttribute("reviews", reviewService.search(keyword));
+return "reviews";
 
-    @Autowired
-    private ReviewService reviewService;
-
-    @GetMapping
-    public String getAllReviews(Model model) {
-        model.addAttribute("reviews", reviewService.getAllReviews());
-        return "reviews";
-    }
-
-    @GetMapping("/new")
-    public String showAddForm(Model model) {
-        model.addAttribute("review", new Review());
-        return "review-form";
-    }
-
-    @PostMapping("/add")
-    public String addReview(@ModelAttribute Review review) {
-        reviewService.addReview(review);
-        return "redirect:/reviews";
-    }
+}
+@GetMapping("/new")
+    public String newForm(){
+     return "review-form";
+}
+// Create, edit, update, and delete review operations (CRUD) for reviews
+@PostMapping
+public String create(@RequestParam String type, @RequestParam String id, @RequestParam String tutorId,
+                     @RequestParam String userId, @RequestParam String rating, @RequestParam String comment,
+                     @RequestParam(required = false) String nickname,
+                     @RequestParam(required = false) String bookingId) {
+    Review review = reviewService.buildReview(type, id, tutorId, userId, parseInt(rating), comment, nickname, bookingId);
+    reviewService.create(review);
+    return "redirect:/reviews";
+}
 
     @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable String id, Model model) {
-        model.addAttribute("review", reviewService.getReviewById(id));
+    public String editForm(@PathVariable String id, Model model) {
+        model.addAttribute("review", reviewService.findById(id).orElse(null));
         return "review-form";
     }
 
-    @PostMapping("/update")
-    public String updateReview(@ModelAttribute Review review) {
-        reviewService.updateReview(review);
+    @PostMapping("/edit/{id}")
+    public String update(@PathVariable String id, @RequestParam String type, @RequestParam String tutorId,
+                         @RequestParam String userId, @RequestParam String rating, @RequestParam String comment,
+                         @RequestParam(required = false) String nickname,
+                         @RequestParam(required = false) String bookingId) {
+        Review review = reviewService.buildReview(type, id, tutorId, userId, parseInt(rating), comment, nickname, bookingId);
+        reviewService.update(review);
         return "redirect:/reviews";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteReview(@PathVariable String id) {
-        reviewService.deleteReview(id);
+    public String delete(@PathVariable String id) {
+        reviewService.delete(id);
         return "redirect:/reviews";
     }
+//Converts string to rating
+    private int parseInt(String value) {
+        try {
+            int number = Integer.parseInt(value);
+            return Math.max(1, Math.min(5, number));
+        } catch (Exception e) {
+            return 1;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
